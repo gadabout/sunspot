@@ -1,5 +1,5 @@
 require 'sunspot/solr/server'
 
-if defined?(Rails) && Rails::VERSION::MAJOR == 3
+if defined?(Rails)
   require 'sunspot/solr/railtie'
 end
