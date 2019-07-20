@@ -1,9 +1,9 @@
 module Sunspot
   module Query
-    # 
+    #
     # Abstract class for function queries.
     #
-    class FunctionQuery 
+    class FunctionQuery
 
       def ^(y)
         @boost_amount = y

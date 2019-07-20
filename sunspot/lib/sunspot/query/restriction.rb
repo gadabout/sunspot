@@ -7,14 +7,14 @@ module Sunspot
         # available to the DSL.
         #
         # ==== Returns
-        # 
+        #
         # Array:: Collection of restriction class names
         #
         def names
           constants - abstract_constants
         end
 
-        # 
+        #
         # Convenience method to access a restriction class by an underscored
         # symbol or string
         #
@@ -35,7 +35,7 @@ module Sunspot
         end
       end
 
-      # 
+      #
       # Subclasses of this class represent restrictions that can be applied to
       # a Sunspot query. The Sunspot::DSL::Restriction class presents a builder
       # API for instances of this class.
@@ -57,7 +57,7 @@ module Sunspot
           @negated, @field, @value = negated, field, value
         end
 
-        # 
+        #
         # A hash representing this restriction in solr-ruby's parameter format.
         # All restriction implementations must respond to this method; however,
         # the base implementation delegates to the #to_positive_boolean_phrase method, so
@@ -72,7 +72,7 @@ module Sunspot
           { :fq => [to_filter_query] }
         end
 
-        # 
+        #
         # Return the boolean phrase associated with this restriction object.
         # Differentiates between positive and negated boolean phrases depending
         # on whether this restriction is negated.
@@ -88,7 +88,7 @@ module Sunspot
           phrase.join
         end
 
-        # 
+        #
         # Boolean phrase representing this restriction in the positive. Subclasses
         # may choose to implement this method rather than #to_params; however,
         # this method delegates to the abstract #to_solr_conditional method, which
@@ -105,7 +105,7 @@ module Sunspot
           "#{Util.escape(@field.indexed_name)}:#{to_solr_conditional}"
         end
 
-        # 
+        #
         # Boolean phrase representing this restriction in the negated. Subclasses
         # may choose to implement this method, but it is not necessary, as the
         # base implementation delegates to #to_positive_boolean_phrase.
@@ -118,14 +118,14 @@ module Sunspot
           "-#{to_positive_boolean_phrase}"
         end
 
-        # 
+        #
         # Whether this restriction should be negated from its original meaning
         #
         def negated? #:nodoc:
           !!@negated
         end
 
-        # 
+        #
         # Return a new restriction that is the negated version of this one. It
         # is used by disjunction denormalization.
         #
@@ -184,7 +184,7 @@ module Sunspot
         end
       end
 
-      # 
+      #
       # Results must have field with value equal to given value. If the value
       # is nil, results must have no value for the given field.
       #
@@ -212,7 +212,7 @@ module Sunspot
         end
       end
 
-      # 
+      #
       # Results must have field with value less than given value
       #
       class LessThan < Base
@@ -229,7 +229,7 @@ module Sunspot
         end
       end
 
-      # 
+      #
       # Results must have field with value less or equal to than given value
       #
       class LessThanOrEqualTo < Base
@@ -246,7 +246,7 @@ module Sunspot
         end
       end
 
-      # 
+      #
       # Results must have field with value greater than given value
       #
       class GreaterThan < Base
@@ -263,7 +263,7 @@ module Sunspot
         end
       end
 
-      # 
+      #
       # Results must have field with value greater than or equal to given value
       #
       class GreaterThanOrEqualTo < Base
@@ -280,7 +280,7 @@ module Sunspot
         end
       end
 
-      # 
+      #
       # Results must have field with value in given range
       #
       class Between < Base
@@ -297,7 +297,7 @@ module Sunspot
         end
       end
 
-      # 
+      #
       # Results must have field with value included in given collection
       #
       class AnyOf < Base
@@ -333,7 +333,7 @@ module Sunspot
             super
           end
         end
-        
+
         private
 
         def to_solr_conditional
@@ -345,7 +345,7 @@ module Sunspot
         end
       end
 
-      # 
+      #
       # Results must have a field with a value that begins with the argument.
       # Most useful for strings, but in theory will work with anything.
       #

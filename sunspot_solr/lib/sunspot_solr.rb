@@ -1,5 +1,5 @@
 require 'sunspot/solr/server'
 
-if defined?(Rails::Railtie)
+if defined?(Rails)
   require 'sunspot/solr/railtie'
 end
